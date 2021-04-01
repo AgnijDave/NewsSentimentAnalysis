@@ -1,0 +1,45 @@
+News Sentiment Analysis (Title + Heading)
+
+Independant Variables X -> ['IDLink', 'Title', 'Headline', 'Source', 'Topic',
+       'PublishDate', 'Facebook', 'GooglePlus', 'LinkedIn']
+
+Dependant Variables Y ( Value to be predicted ) -> [ 'SentimentTitle', 'SentimentHeadline']
+
+EDA ->
+
+Conversion of all negative values to class -1, positive to class 1, and 0 to neutral in order to get a sense of correlation of X and Y.
+
+1.Conversion of Publish Date to a pandas DateTime variable in order to extract the exact Publish Day and Publish Month.
+
+![enter image description here][1]{: Reduction of News consumption on Weekends}
+
+![enter image description here][2]{: Either no data or News consumption reduced to almost nil bw April to October, The former being liklier}
+
+2.Analysis of frequently occurring words in given Topics based on the absolute value of Sentiment Score, in order to update Vader Lexicons to fit better to the provided news topics.
+
+3.Relation of popularity score amongst given platforms.
+
+Approach:
+
+1.Preprocessing of textual data to remove special characters.
+
+2.Handling of missing data in the Test set column 'Source'.
+
+3.Categorical data encoding -> Columns ['Source', 'Topic']
+
+4.Instead of training a different Model (such as an LSTM + GloVe || BOW approach) to get a sentiment score of Title and Heading,
+nltk's Valence Aware Dictionary for sEntiment Reasoning is used to get a numerical score of sentiment in the given text.The compound is taken into account.
+
+5.Feature Scaling to avoid any variable dominance.
+
+6.PCA to transform training data, -> Dimensionality Reduction
+
+Features Used:
+
+Title Model & Headline Model
+
+['Source', 'Topic', 'Facebook', 'GooglePlus', 'LinkedIn', 'publishDay',
+       'publishMonth', 'VaderSentimentScore']
+
+Current Submission -> Model:
+Light gradient Boosting.
